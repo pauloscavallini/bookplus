@@ -1,0 +1,27 @@
+
+.nav {
+    text-align: center;
+    font-weight: bold;
+    color: #1a1a1a;
+}
+
+.logo {
+    width: 30px;
+}
+
+.logoText {
+    font-size: 1.5rem;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    text-align: center;
+}
+
+a {
+    font-size: 11px;
+    color: #6b7280;
+    transition: all 0.2s;
+}
+
+a:hover {
+    color: var(--primary-color);
+}
