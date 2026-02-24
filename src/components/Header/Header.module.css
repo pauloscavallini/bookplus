@@ -25,3 +25,7 @@ a {
 a:hover {
     color: var(--primary-color);
 }
+
+.search {
+    background: #f9fafb;
+}

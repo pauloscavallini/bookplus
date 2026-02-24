@@ -1,0 +1,7 @@
+.title {
+    transition: color 0.2s ease;
+}
+
+.card:hover .title {
+    color: #1e3a8a;
+}

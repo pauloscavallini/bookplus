@@ -1,5 +1,17 @@
 .buttonPrimary {
-    padding: 10px 20px !important;
+    /* padding: 10px 20px !important; */
     color: #fff !important;
     background-color: var(--primary-color) !important;
+}
+
+.buttonSecondary {
+    background-color: #fff;
+}
+
+.buttonThird {
+    background-color: transparent !important;
+}
+
+.buttonThird:hover {
+    background-color: #f0f8ff30 !important;
 }
