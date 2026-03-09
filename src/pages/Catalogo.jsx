@@ -1,7 +1,7 @@
 import BookCard from "../components/BookCard/BookCard";
 import BookGrid from "../components/BookGrid/BookGrid";
 import SectionTitle from "../components/SectionTitle/SectionTitle";
-import { dadosLivros } from "../dados/dadosLivros";
+import { request } from "../dados/request";
 
 export default function Catalogo() {
     return (
