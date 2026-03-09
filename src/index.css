@@ -29,3 +29,8 @@
   font-size: 0.6875rem !important;
   line-height: 1.1;
 }
+
+input {
+  border: none;
+  outline: none;
+}

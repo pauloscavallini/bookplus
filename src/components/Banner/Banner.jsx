@@ -4,7 +4,7 @@ import css from './Banner.module.css';
 export default function Banner() {
     return (
         <div className={`${css.banner} container-fluid d-flex text-white p-5`}>
-            <div className="m-5 col-7">
+            <div className="container py-5">
                 <span className="tag-xs fw-bold ls-lg bg-secondary bg-opacity-50 rounded-pill px-3 py-1 border border-white border-opacity-25">
                     CURADORIA EXCLUSIVA
                 </span>
