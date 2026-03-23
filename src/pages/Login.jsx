@@ -1,9 +1,42 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Button from "../components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({logado, setLogado}) {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (logado) {
+            navigate("/");
+        }
+    }, [])
+
+    async function logar() {
+        let resposta = await fetch("https://apps-api-livros.ucxocw.easypanel.host/login", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                senha: senha
+            })
+        })
+
+        resposta = await resposta.json()
+
+        if (resposta.token) {
+            localStorage.setItem('token', resposta.token)
+            localStorage.setItem('user_email', resposta.usuario.email)
+            localStorage.setItem('user_nome', resposta.usuario.nome)
+            localStorage.setItem('user_id', resposta.usuario.id)
+            setLogado(true);
+            navigate("/");
+        }
+    }
 
     return (
         <div className="container d-flex py-5">
@@ -34,7 +67,7 @@ export default function Login() {
                         />
                 </div>
 
-                <Button texto={"LOGIN"} className={"fw-bold"} />
+                <Button onClick={logar} texto={"LOGIN"} className={"fw-bold"} />
             </div>
         </div>
     )

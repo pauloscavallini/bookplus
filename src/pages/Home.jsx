@@ -17,7 +17,6 @@ export default function Home() {
                 "Content-Type": "application/json"
             }
         });
-        // console.log(await resultadoDados.json())
         let livros = await resultadoDados.json()
         return livros.livros;
     }
@@ -48,7 +47,7 @@ export default function Home() {
             <BookGrid>
             {dados ? dados.map((livro, index) => (
                 <BookCard
-                    key={index}
+                    key={livro.id}
                     genero="POESIA"
                     nome={livro["titulo"]}
                     autor={livro["autor"]}

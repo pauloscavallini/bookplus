@@ -1,9 +1,21 @@
 import css from './Header.module.css';
 import logo from '/logo.svg';
 import Button from "../Button/Button.jsx";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-export default function Header({titulo = "BOOK PLUS"}) {
+export default function Header({titulo = "BOOK PLUS", logado, setLogado}) {
+    const navigate = useNavigate();
+
+    async function deslogar() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user_email');
+        localStorage.removeItem('user_nome');
+        localStorage.removeItem('user_id');
+        setLogado(false);
+        navigate('/');
+    }
+
     return (
         <header className="container">
             <div className="col d-flex flex-column px-2 py-4">
@@ -22,8 +34,10 @@ export default function Header({titulo = "BOOK PLUS"}) {
                     <div className="col-5 col-lg-4 d-none d-md-block">
                         <nav className={css.nav + " d-flex align-items-center justify-content-end fw-bold ls-md gap-3"}>
                             <Link to={"/catalogo"} href="#">CATALÓGO</Link>
+                            {logado ?
+                            <Button onClick={deslogar} texto="LOGOUT" /> :
                             <Button to={"/login"} texto="LOGIN ADMIN" />
-                            <a></a>
+                            }
                         </nav>
                     </div>
                 </div>
