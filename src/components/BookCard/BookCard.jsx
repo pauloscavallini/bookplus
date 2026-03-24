@@ -16,7 +16,7 @@ export default function BookCard({ nome, genero, autor, imagem = defaultImagem})
                 }}
                 className="rounded-4"
             ></div>
-            <span className="tag-xs ls-md fw-bold text-body-tertiary pt-3">{genero}</span>
+            <span className="tag-xs ls-md fw-bold text-body-tertiary text-uppercase pt-3">{genero}</span>
             <span className={css.title + " fw-bold fs-5"}>{nome}</span>
             <span className="text-body-tertiary fst-italic fw-normal">{autor}</span>
         </div>

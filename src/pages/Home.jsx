@@ -25,7 +25,13 @@ export default function Home() {
         const buscar = async () => {
             var lista1 = await carregarDados("titulo=" + filtro);
             var lista2 = await carregarDados("autor=" + filtro);
-            var listaFinal = lista1.concat(lista2);
+
+            const listaFinal = [
+                ...new Map(
+                    lista1.concat(lista2).map(livro => [livro.id, livro])
+                ).values()
+            ];
+
             setDados(listaFinal);
         }
         buscar();
@@ -48,9 +54,9 @@ export default function Home() {
             {dados ? dados.map((livro, index) => (
                 <BookCard
                     key={livro.id}
-                    genero="POESIA"
-                    nome={livro["titulo"]}
-                    autor={livro["autor"]}
+                    genero={livro.categoria}
+                    nome={livro.titulo}
+                    autor={livro.autor}
                     imagem={livro.imagem}
                 />
             )): dadosLivros.map((livro, index) => (

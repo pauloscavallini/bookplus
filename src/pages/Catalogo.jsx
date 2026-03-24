@@ -31,7 +31,7 @@ export default function Catalogo() {
         <div className="container py-5">
             <SectionTitle titulo={"NOVIDADES"} topico={"Destaques da Semana"} />
                 <BookGrid>
-                    {livros.map((livro, index) => (
+                    {livros.map((livro) => (
                         <BookCard
                             key={livro.id}
                             genero="POESIA"

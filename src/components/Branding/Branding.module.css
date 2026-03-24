@@ -1,0 +1,5 @@
+.logoText {
+    color: var(--primary-color) !important;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+}
