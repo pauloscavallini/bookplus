@@ -1,9 +1,20 @@
 import { Link, useParams } from "react-router-dom"
-import { dadosLivros } from "../dados/dadosLivros";
+import { useEffect, useState } from "react";
 
 export default function PaginaLivro() {
     const {id} = useParams();
-    const livro = dadosLivros.find((item) => item.id === parseInt(id));
+    const [livro, setLivro] = useState({});
+
+    useEffect(() => {
+      const buscar = async () => {
+        let resposta = await fetch(`https://apps-api-livros.ucxocw.easypanel.host/livro/${id}`)
+        let data = await resposta.json();
+        setLivro(data.livro);
+
+        console.log(data.livro);
+      }
+      buscar();
+    }, [])
 
     if (!livro) {
     return (
@@ -18,13 +29,20 @@ export default function PaginaLivro() {
 
     return (
     <div className="container d-flex py-3">
-        <div className="col-6">
-            <img src={livro.imagem} alt="Capa do livro" />
+        <div className="col-6 pe-5" style={{ height: 500, overflow: "hidden" }}>
+          <img
+            src={livro.imagem}
+            alt="Capa do livro"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
         </div>
+        {/* <div className="col-6" style={{backgroundImage: `src(${livro.imagem})`}}>
+            <img src={livro.imagem} alt="Capa do livro" />
+        </div> */}
         <div className="col-6">
-            <p className="fs-3">{livro.titulo}</p>
-            <p className="fs-5">Autor: {livro.autor}</p>
-            <p className="fs-6">Ano publicação: {livro.ano_publicacao}</p>
+            <p className="fs-3">{livro.titulo} - {livro.faixa_etaria}</p>
+            <p className="fs-6 d-flex flex-column"><span className="fw-semibold">Autor:</span> {livro.autor}</p>
+            <p className="fs-6 d-flex flex-column"><span className="fw-semibold">Descrição:</span> {livro.descricao}</p>
         </div>
     </div>
     )

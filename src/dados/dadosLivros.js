@@ -6,6 +6,7 @@ export const dadosLivros = [
         'titulo': "Libertadores 1999",
         'autor': "Palmeiras",
         'ano_publicacao': 1999,
+        'categoria': '',
         'imagem': defaultImagem
     }
 ]

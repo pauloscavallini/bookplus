@@ -2,7 +2,6 @@ import SectionTitle from "../components/SectionTitle/SectionTitle.jsx";
 import BookGrid from "../components/BookGrid/BookGrid.jsx";
 import BookCard from "../components/BookCard/BookCard.jsx";
 import Banner from "../components/Banner/Banner.jsx";
-import { request } from "../dados/request.js";
 import { dadosLivros } from "../dados/dadosLivros.js";
 import { useState, useEffect } from "react";
 
@@ -23,17 +22,23 @@ export default function Home() {
 
     useEffect(() => {
         const buscar = async () => {
-            var lista1 = await carregarDados("titulo=" + filtro);
-            var lista2 = await carregarDados("autor=" + filtro);
+            try {
+                var lista1 = await carregarDados("titulo=" + filtro);
+                var lista2 = await carregarDados("autor=" + filtro);
 
-            const listaFinal = [
-                ...new Map(
-                    lista1.concat(lista2).map(livro => [livro.id, livro])
-                ).values()
-            ];
+                const listaFinal = [
+                    ...new Map(
+                        lista1.concat(lista2).map(livro => [livro.id, livro])
+                    ).values()
+                ];
 
-            setDados(listaFinal);
+                setDados(listaFinal);
+            }
+            catch(e) {
+                console.log(e);
+            };
         }
+
         buscar();
     }, [filtro])
 
@@ -51,20 +56,22 @@ export default function Home() {
             />
             </div>
             <BookGrid>
-            {dados ? dados.map((livro, index) => (
+            {dados.length ? dados.map((livro) => (
                 <BookCard
                     key={livro.id}
+                    id={livro.id}
                     genero={livro.categoria}
                     nome={livro.titulo}
                     autor={livro.autor}
                     imagem={livro.imagem}
                 />
-            )): dadosLivros.map((livro, index) => (
+            )): dadosLivros.map((livro) => (
                 <BookCard
-                    key={index}
-                    genero="POESIA"
-                    nome={livro["titulo"]}
-                    autor={livro["autor"]}
+                    id={livro.id}
+                    key={livro.id}
+                    genero={livro.categoria}
+                    nome={livro.titulo}
+                    autor={livro.autor}
                 />
             ))}
             </BookGrid>

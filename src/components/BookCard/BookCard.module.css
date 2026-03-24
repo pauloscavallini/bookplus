@@ -3,5 +3,5 @@
 }
 
 .card:hover .title {
-    color: #1e3a8a;
+    color: #1e3a8a !important;
 }

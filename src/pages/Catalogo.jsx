@@ -1,8 +1,6 @@
 import BookCard from "../components/BookCard/BookCard";
 import BookGrid from "../components/BookGrid/BookGrid";
 import SectionTitle from "../components/SectionTitle/SectionTitle";
-import { request } from "../dados/request";
-import { dadosLivros } from "../dados/dadosLivros";
 import { useEffect, useState } from "react";
 
 export default function Catalogo() {
@@ -20,27 +18,33 @@ export default function Catalogo() {
     }
 
     useEffect(() => {
-        const carregar = async () => {
-            const data = await carregarDados();
-            setLivros(data);
+        const buscar = async () => {
+            try {
+                var lista1 = await carregarDados();
+                setLivros(lista1);
+            }
+            catch(e) {
+                console.log(e);
+            };
         }
-        carregar();
-    }, []);
+
+        buscar();
+    }, [])
 
     return (
         <div className="container py-5">
             <SectionTitle titulo={"NOVIDADES"} topico={"Destaques da Semana"} />
-                <BookGrid>
-                    {livros.map((livro) => (
-                        <BookCard
-                            key={livro.id}
-                            genero="POESIA"
-                            nome={livro["titulo"]}
-                            autor={livro["autor"]}
-                            imagem={livro.imagem}
-                        />
-                    ))}
-                </BookGrid>
+            <BookGrid>
+            {livros.map((livro) => (
+                <BookCard
+                    key={livro.id}
+                    genero="POESIA"
+                    nome={livro["titulo"]}
+                    autor={livro["autor"]}
+                    imagem={livro.imagem}
+                />
+            ))}
+            </BookGrid>
         </div>
     )
 }
